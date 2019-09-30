@@ -16,6 +16,7 @@ export default new Vuex.Store({
     accountScreen: false,
     nameScreen: false,
     emailScreen: false,
+    addExerciseScreen: false,
     sessionTimeout: false,
   },
   mutations: {
@@ -50,6 +51,9 @@ export default new Vuex.Store({
     },
     toggleTimeout: (state, action) => {
       state.sessionTimeout = action;
+    },
+    toggleAddExercise: (state, action) => {
+      state.addExerciseScreen = action;
     },
   },
   actions: {
@@ -113,6 +117,12 @@ export default new Vuex.Store({
     },
     closeSessionTimeout({ commit }) {
       commit('toggleTimeout', false);
+    },
+    openAddExercise({ commit }) {
+      commit('toggleAddExercise', true);
+    },
+    closeAddExercise({ commit }) {
+      commit('toggleAddExercise', false);
     },
   },
 });

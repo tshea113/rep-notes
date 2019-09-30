@@ -32,7 +32,7 @@ def token_required(f):
         try:
             token = auth_headers[1]
             data = jwt.decode(token, Config.SECRET_KEY)
-            user = User.query.filter_by(id=data['sub']).first()
+            user = User.query.filter_by(user_id=data['sub']).first()
             if not user:
                 return redirect('/')
             return f(user, *args, **kwargs)
@@ -88,7 +88,7 @@ def login():
         return jsonify({'message': 'Invalid credentials', 'authenticated': False}), 401
 
     token = jwt.encode({
-        'sub': user.id,
+        'sub': user.user_id,
         'iat':datetime.utcnow(),
         'exp': datetime.utcnow() + timedelta(minutes=30)},
         Config.SECRET_KEY)

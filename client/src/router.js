@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import axios from 'axios';
 import Home from './views/Home.vue';
 import Dashboard from './views/Dashboard.vue';
+import Workout from './views/Workout.vue';
 import store from './store';
 
 Vue.use(Router);
@@ -21,6 +22,12 @@ const router = new Router({
       name: 'dashboard',
       meta: { requiresAuth: true },
       component: Dashboard,
+    },
+    {
+      path: '/workout',
+      name: 'workout',
+      meta: { requiresAuth: true },
+      component: Workout,
     },
     {
       path: '*',

@@ -2,7 +2,6 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_security import Security, SQLAlchemyUserDatastore, login_required
 from flask_mail import Mail
 from flask_cors import CORS
 from backend.config import *
@@ -25,11 +24,9 @@ def create_app():
     # Enable CORS
     CORS(app, resources={r'/*': {'origins': '*'}})
 
-    from .models import User, Role
-
-    # Configure Security
-    #user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-    #app.security = Security(app, user_datastore)
+    from .models import User, Exercise
+    with app.app_context():
+        db.create_all()
 
     # Blueprint for auth routes in our app
     from .auth import auth as auth_blueprint

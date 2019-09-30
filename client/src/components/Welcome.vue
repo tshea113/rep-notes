@@ -9,7 +9,7 @@
           text-xs-center
           mb-3"
       >
-        AQUARIUM MANAGEMENT SYSTEM
+        REP NOTES
       </div>
       <div
         id="content"
@@ -18,7 +18,7 @@
           white--text
           text-xs-center"
       >
-        The all-in-one solution for remote aquarium management.
+        A simplistic solution to fitness logging.
       </div>
       <v-snackbar
         v-model="snackbar"
@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 #welcome {
-    background-image: url('../../public/koi-background.jpg');
+    background-color: orangered;
     background-size: cover;
     width: 100%;
     height: 100%;

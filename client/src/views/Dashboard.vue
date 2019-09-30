@@ -2,9 +2,7 @@
     <v-container
       fluid
     >
-      <v-row
-        :align = "start"
-      >
+      <v-row>
         <v-col
           cols="12"
           md="2"
@@ -14,7 +12,7 @@
             height="100%"
           >
             <v-card-title
-              class="display-1"
+              class="title"
             >
               Hello, {{ this.account.firstName }}!
             </v-card-title>
