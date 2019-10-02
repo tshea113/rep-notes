@@ -65,7 +65,7 @@
       <login/>
       <signup/>
       <account/>
-      <add-exercise></add-exercise>
+      <add-exercise/>
     </v-app-bar>
   </span>
 </template>
@@ -118,7 +118,10 @@ export default {
     ]),
   },
   components: {
-    Login, Signup, Account, AddExercise
+    Login,
+    Signup,
+    Account,
+    AddExercise
   },
   methods: {
     ...mapActions([

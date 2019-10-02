@@ -3,7 +3,7 @@
 from flask import Blueprint, redirect, request, jsonify
 from werkzeug.security import check_password_hash
 from datetime import datetime, timedelta
-from .models import User
+from .models import User, Exercise
 from . import db
 from backend.config import Config
 from functools import wraps
@@ -67,7 +67,7 @@ def register():
         last_name,
         email,
         password
-        )
+    )
 
     # Add the new user to the database
     db.session.add(new_user)
@@ -139,3 +139,31 @@ def changeEmail(current_user):
     return jsonify({ 
         'email': current_user.email,
     })
+
+@auth.route('/newExercise', methods=['POST'])
+@token_required
+def newExercise(current_user):
+    data = request.json
+
+    exerciseName = data.get("name")
+    exerciseGroup = data.get("group")
+
+    newExercise = Exercise(
+        name=exerciseName,
+        group=exerciseGroup,
+        user=current_user
+    )
+
+    # Add the new exercise to the database
+    db.session.add(newExercise)
+    db.session.commit()
+
+    return jsonify(newExercise.to_dict()), 201
+
+@auth.route('/getExercises', methods=['GET'])
+@token_required
+def getExercises(current_user):
+    exercises = User.query.filter_by(user_id=current_user.user_id).first()
+    json_list = [i.serialize for i in exercises.exercises]
+
+    return jsonify(json_list), 201

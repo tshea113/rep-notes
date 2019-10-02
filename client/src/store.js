@@ -10,6 +10,7 @@ export default new Vuex.Store({
       lastName: null,
       email: null,
     },
+    exercises: [],
     accessToken: null,
     loginScreen: false,
     signupScreen: false,
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     nameScreen: false,
     emailScreen: false,
     addExerciseScreen: false,
+    newExerciseScreen: false,
     sessionTimeout: false,
   },
   mutations: {
@@ -33,6 +35,9 @@ export default new Vuex.Store({
     },
     updateAccessToken: (state, accessToken) => {
       state.accessToken = accessToken;
+    },
+    addExercise: (state, exercise) => {
+      state.exercises.push(exercise);
     },
     toggleLogin: (state, action) => {
       state.loginScreen = action;
@@ -55,6 +60,9 @@ export default new Vuex.Store({
     toggleAddExercise: (state, action) => {
       state.addExerciseScreen = action;
     },
+    toggleNewExercise: (state, action) => {
+      state.newExerciseScreen = action;
+    },
   },
   actions: {
     // Setters and Getters
@@ -75,6 +83,9 @@ export default new Vuex.Store({
     },
     fetchAccessToken({ commit }) {
       commit('updateAccessToken', localStorage.getItem('token'));
+    },
+    addExercise({ commit }, exercise) {
+      commit('addExercise', exercise);
     },
     logout({ commit }) {
       localStorage.clear();
@@ -123,6 +134,12 @@ export default new Vuex.Store({
     },
     closeAddExercise({ commit }) {
       commit('toggleAddExercise', false);
+    },
+    openNewExercise({ commit }) {
+      commit('toggleNewExercise', true);
+    },
+    closeNewExercise({ commit }) {
+      commit('toggleNewExercise', false);
     },
   },
 });
